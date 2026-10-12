@@ -1,0 +1,94 @@
+{
+  "id": "tensor-foundry",
+  "realm": "tensor-foundry",
+  "enabled": true,
+  "displayName": "Tensor Foundry Realm",
+  "sslRequired": "external",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
+  "roles": {
+    "realm": [
+      {
+        "name": "viewer",
+        "description": "Read-only access to tensor graphs, coverage matrices, and benchmarks"
+      },
+      {
+        "name": "operator",
+        "description": "Standard operator access: trace graphs, compile kernels, run profiling"
+      },
+      {
+        "name": "admin",
+        "description": "Full administrative control including LLM settings and system diagnostics"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "tensor-foundry-client",
+      "name": "Tensor Foundry SPA Client",
+      "enabled": true,
+      "publicClient": true,
+      "protocol": "openid-connect",
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "http://127.0.0.1:5173/*",
+        "http://127.0.0.1:8080/*",
+        "http://localhost:5173/*"
+      ],
+      "webOrigins": [
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:8000",
+        "http://localhost:5173"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://127.0.0.1:5173/*"
+      }
+    },
+    {
+      "clientId": "tensor-foundry-api",
+      "name": "Tensor Foundry API Audience",
+      "enabled": true,
+      "bearerOnly": true,
+      "protocol": "openid-connect"
+    }
+  ],
+  "users": [
+    {
+      "username": "alan_engineer",
+      "enabled": true,
+      "email": "alanvo@gmail.com",
+      "firstName": "Alan",
+      "lastName": "Vo",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "dev_engineer_pass123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["operator", "admin"]
+    },
+    {
+      "username": "demo_viewer",
+      "enabled": true,
+      "email": "viewer@example.com",
+      "firstName": "Demo",
+      "lastName": "Viewer",
+      "credentials": [
+        {
+          "type": "password",
+          "value": "viewer_pass123",
+          "temporary": false
+        }
+      ],
+      "realmRoles": ["viewer"]
+    }
+  ]
+}

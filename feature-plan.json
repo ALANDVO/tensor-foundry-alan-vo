@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "current_feature": "tensor-engine-and-graph-compiler",
+  "features": [
+    {
+      "id": "tensor-engine-and-graph-compiler",
+      "title": "Tensor Dynamic Graph & Inductor Compiler Engine",
+      "status": "in_progress",
+      "acceptance": [
+        "Create multi-dimensional tensors with forward and reverse-mode automatic differentiation DAG",
+        "Trace computational graphs and extract Graph IR nodes and execution dependencies",
+        "Execute Inductor compiler fusion passes to merge pointwise activations and linear layers",
+        "Generate multi-target kernel code (C/OpenMP, Metal MSL, Vulkan GLSL, CUDA)",
+        "Profile execution metrics including FLOPs, memory footprint, and compiled speedup ratio"
+      ],
+      "implementation": [
+        "backend/app/services/tensor_engine.py",
+        "backend/app/services/compiler_engine.py",
+        "backend/app/api/compiler.py"
+      ],
+      "tests": [
+        "backend/tests/test_tensor_engine.py",
+        "backend/tests/test_compiler_engine.py"
+      ]
+    },
+    {
+      "id": "hardware-op-coverage-matrix",
+      "title": "Multi-Hardware Operator Coverage & Triage Matrix",
+      "status": "planned",
+      "acceptance": [
+        "Catalog operators across hardware targets (CPU, MPS 2.6+, Vulkan 1.3, CUDA SM_90)",
+        "Analyze graph lowerability and detect unsupported fallback operators",
+        "Calculate community request triage scores and generate op implementation roadmaps"
+      ],
+      "implementation": [
+        "backend/app/services/coverage_service.py",
+        "backend/app/api/coverage.py"
+      ],
+      "tests": [
+        "backend/tests/test_coverage_service.py"
+      ]
+    },
+    {
+      "id": "dataloader-worker-memory-profiler",
+      "title": "DataLoader Multi-Worker Memory Replication Profiler",
+      "status": "planned",
+      "acceptance": [
+        "Simulate worker pool memory consumption across fork and spawn IPC regimes",
+        "Detect list copying memory amplification versus zero-copy shared memory tensor buffers",
+        "Provide memory savings reports and batch allocation benchmarks"
+      ],
+      "implementation": [
+        "backend/app/services/profiler_service.py",
+        "backend/app/api/profiler.py"
+      ],
+      "tests": [
+        "backend/tests/test_profiler_service.py"
+      ]
+    },
+    {
+      "id": "oidc-pkce-auth-and-audit",
+      "title": "Keycloak OIDC PKCE Bearer Authentication & Audit Log",
+      "status": "planned",
+      "acceptance": [
+        "Verify JWT tokens with issuer, audience, and role checks (viewer, operator, admin)",
+        "Support local demo authentication with localhost restriction",
+        "Track transactional audit log entries for all mutations with UTC timestamps"
+      ],
+      "implementation": [
+        "backend/app/core/security.py",
+        "backend/app/api/auth.py",
+        "backend/app/services/audit_service.py"
+      ],
+      "tests": [
+        "backend/tests/test_auth.py",
+        "backend/tests/test_audit.py"
+      ]
+    },
+    {
+      "id": "advisory-llm-diagnostics",
+      "title": "Provider-Agnostic Advisory LLM Optimization Engine",
+      "status": "planned",
+      "acceptance": [
+        "Provide grounded optimization advice based on actual compiled graph metrics",
+        "Support OpenAI-compatible, Anthropic, Gemini, and Ollama adapters",
+        "Maintain zero external network dependencies when LLM_API_KEY is unset"
+      ],
+      "implementation": [
+        "backend/app/services/llm_advisor.py",
+        "backend/app/api/advisor.py"
+      ],
+      "tests": [
+        "backend/tests/test_llm_advisor.py"
+      ]
+    }
+  ]
+}

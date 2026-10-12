@@ -1,0 +1,32 @@
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python cache and build
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+
+# Node & Frontend
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Databases & local state
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment variables
+.env
+.env.local
+
+# Agent metadata
+.antigravitycli/
+.omp/
