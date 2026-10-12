@@ -1,0 +1,39 @@
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #030712;
+  color: #f3f4f6;
+  min-height: 100vh;
+}
+
+/* Base custom styles without depending on tailwind post-processor */
+.bg-gray-950 { background-color: #030712; }
+.bg-gray-900 { background-color: #111827; }
+.bg-gray-850 { background-color: #172033; }
+.bg-gray-800 { background-color: #1f2937; }
+.bg-gray-700 { background-color: #374151; }
+
+.border-gray-900 { border-color: #111827; }
+.border-gray-800 { border-color: #1f2937; }
+.border-gray-700 { border-color: #374151; }
+
+.text-indigo-400 { color: #818cf8; }
+.text-indigo-300 { color: #a5b4fc; }
+.bg-indigo-600 { background-color: #4f46e5; }
+.hover\:bg-indigo-500:hover { background-color: #6366f1; }
+
+.text-emerald-400 { color: #34d399; }
+.bg-emerald-950 { background-color: #064e3b; }
+.text-rose-400 { color: #fb7185; }
+.bg-rose-950 { background-color: #4c0519; }
+.text-amber-400 { color: #fbbf24; }
+.bg-amber-950 { background-color: #451a03; }
+
+pre, code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}

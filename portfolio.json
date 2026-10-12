@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "name": "tensor-foundry-alan-vo",
+  "owner": "ALANDVO",
+  "email": "alanvo@gmail.com",
+  "domain": "AI/ML developer tools",
+  "workflows": [
+    "Dynamic autograd graph tracing, fusion compilation, and multi-backend kernel emission",
+    "Multi-hardware operator coverage matrix triage and fallback lowering analysis",
+    "DataLoader worker memory replication profiling and zero-copy IPC validation"
+  ],
+  "auth": "oidc-keycloak-saml-broker",
+  "llm_providers": [
+    "openai-compatible",
+    "anthropic",
+    "gemini",
+    "ollama"
+  ],
+  "summary": "Work in progress: tensor-foundry-alan-vo",
+  "status": "work-in-progress"
+}
