@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "Interactive Web Console for TensorFoundry",
   "type": "module",
-  "author": "Alan Vo <alanvo@gmail.com>",
+  "author": {
+    "name": "Alan Vo",
+    "email": "alanvo@gmail.com",
+    "url": "https://github.com/ALANDVO"
+  },
   "license": "MIT",
   "scripts": {
     "dev": "vite",
