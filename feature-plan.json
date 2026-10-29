@@ -5,7 +5,7 @@
     {
       "id": "tensor-engine-and-graph-compiler",
       "title": "Tensor Dynamic Graph & Inductor Compiler Engine",
-      "status": "in_progress",
+      "status": "done",
       "acceptance": [
         "Create multi-dimensional tensors with forward and reverse-mode automatic differentiation DAG",
         "Trace computational graphs and extract Graph IR nodes and execution dependencies",

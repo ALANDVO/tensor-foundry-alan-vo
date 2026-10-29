@@ -1,8 +1,24 @@
 # Changelog
 
-## 1.1.0 — work-in-progress checkpoint
+## 1.2.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.
+
+## 1.1.0 — 2026-10-29
+
+### Completed: tensor-engine-and-graph-compiler
+- Dynamic tensor engine with multi-dimensional arrays and reverse-mode autograd DAG
+- Computational graph tracing extracting IR nodes and execution dependencies
+- Inductor-style fusion passes merging pointwise chains and GEMM+activation sequences
+- Multi-target kernel codegen: CPU C/OpenMP, Metal MSL, Vulkan GLSL, CUDA
+- Execution metrics profiling: FLOPs, memory footprint, compiled speedup ratio
+- 30 backend tests passing (6 tensor + 8 compiler + 16 other features)
+
+### Planned (next)
+- hardware-op-coverage-matrix
+- dataloader-worker-memory-profiler
+- oidc-pkce-auth-and-audit
+- advisory-llm-diagnostics
 
 ## 1.0.0 — work-in-progress checkpoint
 

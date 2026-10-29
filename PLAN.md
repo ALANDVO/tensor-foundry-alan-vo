@@ -10,7 +10,7 @@ tensor-engine-and-graph-compiler
 
 ### tensor-engine-and-graph-compiler — Tensor Dynamic Graph & Inductor Compiler Engine
 
-Status: in_progress
+Status: done
 
 Acceptance:
 - Create multi-dimensional tensors with forward and reverse-mode automatic differentiation DAG
