@@ -1,5 +1,41 @@
 # Changelog
 
+## 1.3.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
+## 1.3.0 — 2026-11-05
+
+### Enhanced: tensor-engine-core-ops
+- Added `Tensor.transpose(*axes)` with full gradient support for arbitrary dimension permutations
+- Added `Tensor.reshape(*shape)` with gradient support for view-based shape changes
+- Added `Tensor.__truediv__` and `__rtruediv__` element-wise division with gradient support (scalar and tensor)
+- All 30 backend tests passing, manual verification of new operations successful
+
+### Completed: hardware-op-coverage-matrix
+- Catalog operators across hardware targets (CPU, MPS 2.6+, Vulkan 1.3, CUDA SM_90)
+- Analyze graph lowerability and detect unsupported fallback operators
+- Calculate community request triage scores and generate op implementation roadmaps
+- Frontend: CoverageMatrixView with filtering, search, and lowerability analyzer
+
+### Completed: dataloader-worker-memory-profiler
+- Simulate worker pool memory consumption across fork and spawn IPC regimes
+- Detect list copying memory amplification versus zero-copy shared memory tensor buffers
+- Provide memory savings reports and batch allocation benchmarks
+- Frontend: MemoryProfilerView with simulation controls and results
+
+### Completed: oidc-pkce-auth-and-audit
+- Verify JWT tokens with issuer, audience, and role checks (viewer, operator, admin)
+- Support local demo authentication with localhost restriction
+- Track transactional audit log entries for all mutations with UTC timestamps
+- Frontend: AuditLogView with log inspection
+- Keycloak realm configuration
+
+### Completed: advisory-llm-diagnostics
+- Provide grounded optimization advice based on actual compiled graph metrics
+- Support OpenAI-compatible, Anthropic, Gemini, and Ollama adapters
+- Maintain zero external network dependencies when LLM_API_KEY is unset
+
 ## 1.2.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.
@@ -13,12 +49,6 @@ Partial code published for continued development. Known issues: STATUS.md.
 - Multi-target kernel codegen: CPU C/OpenMP, Metal MSL, Vulkan GLSL, CUDA
 - Execution metrics profiling: FLOPs, memory footprint, compiled speedup ratio
 - 30 backend tests passing (6 tensor + 8 compiler + 16 other features)
-
-### Planned (next)
-- hardware-op-coverage-matrix
-- dataloader-worker-memory-profiler
-- oidc-pkce-auth-and-audit
-- advisory-llm-diagnostics
 
 ## 1.0.0 — work-in-progress checkpoint
 
