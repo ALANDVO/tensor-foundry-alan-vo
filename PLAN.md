@@ -25,46 +25,46 @@ Tests: `backend/tests/test_tensor_engine.py`, `backend/tests/test_compiler_engin
 
 ### hardware-op-coverage-matrix — Multi-Hardware Operator Coverage & Triage Matrix
 
-Status: planned
+Status: done
 
 Acceptance:
 - Catalog operators across hardware targets (CPU, MPS 2.6+, Vulkan 1.3, CUDA SM_90)
 - Analyze graph lowerability and detect unsupported fallback operators
 - Calculate community request triage scores and generate op implementation roadmaps
 
-Implementation: `backend/app/services/coverage_service.py`, `backend/app/api/coverage.py`
+Implementation: `backend/app/services/coverage_service.py`, `backend/app/api/coverage.py`, `frontend/src/components/CoverageMatrixView.tsx`
 
 Tests: `backend/tests/test_coverage_service.py`
 
 ### dataloader-worker-memory-profiler — DataLoader Multi-Worker Memory Replication Profiler
 
-Status: planned
+Status: done
 
 Acceptance:
 - Simulate worker pool memory consumption across fork and spawn IPC regimes
 - Detect list copying memory amplification versus zero-copy shared memory tensor buffers
 - Provide memory savings reports and batch allocation benchmarks
 
-Implementation: `backend/app/services/profiler_service.py`, `backend/app/api/profiler.py`
+Implementation: `backend/app/services/profiler_service.py`, `backend/app/api/profiler.py`, `frontend/src/components/MemoryProfilerView.tsx`
 
 Tests: `backend/tests/test_profiler_service.py`
 
 ### oidc-pkce-auth-and-audit — Keycloak OIDC PKCE Bearer Authentication & Audit Log
 
-Status: planned
+Status: done
 
 Acceptance:
 - Verify JWT tokens with issuer, audience, and role checks (viewer, operator, admin)
 - Support local demo authentication with localhost restriction
 - Track transactional audit log entries for all mutations with UTC timestamps
 
-Implementation: `backend/app/core/security.py`, `backend/app/api/auth.py`, `backend/app/services/audit_service.py`
+Implementation: `backend/app/core/security.py`, `backend/app/api/auth.py`, `backend/app/services/audit_service.py`, `frontend/src/components/AuditLogView.tsx`, `keycloak/realm-export.json`
 
-Tests: `backend/tests/test_auth.py`, `backend/tests/test_audit.py`
+Tests: `backend/tests/test_auth_and_api.py`
 
 ### advisory-llm-diagnostics — Provider-Agnostic Advisory LLM Optimization Engine
 
-Status: planned
+Status: done
 
 Acceptance:
 - Provide grounded optimization advice based on actual compiled graph metrics

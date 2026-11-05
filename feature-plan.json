@@ -26,7 +26,7 @@
     {
       "id": "hardware-op-coverage-matrix",
       "title": "Multi-Hardware Operator Coverage & Triage Matrix",
-      "status": "planned",
+      "status": "done",
       "acceptance": [
         "Catalog operators across hardware targets (CPU, MPS 2.6+, Vulkan 1.3, CUDA SM_90)",
         "Analyze graph lowerability and detect unsupported fallback operators",
@@ -34,7 +34,8 @@
       ],
       "implementation": [
         "backend/app/services/coverage_service.py",
-        "backend/app/api/coverage.py"
+        "backend/app/api/coverage.py",
+        "frontend/src/components/CoverageMatrixView.tsx"
       ],
       "tests": [
         "backend/tests/test_coverage_service.py"
@@ -43,7 +44,7 @@
     {
       "id": "dataloader-worker-memory-profiler",
       "title": "DataLoader Multi-Worker Memory Replication Profiler",
-      "status": "planned",
+      "status": "done",
       "acceptance": [
         "Simulate worker pool memory consumption across fork and spawn IPC regimes",
         "Detect list copying memory amplification versus zero-copy shared memory tensor buffers",
@@ -51,7 +52,8 @@
       ],
       "implementation": [
         "backend/app/services/profiler_service.py",
-        "backend/app/api/profiler.py"
+        "backend/app/api/profiler.py",
+        "frontend/src/components/MemoryProfilerView.tsx"
       ],
       "tests": [
         "backend/tests/test_profiler_service.py"
@@ -60,7 +62,7 @@
     {
       "id": "oidc-pkce-auth-and-audit",
       "title": "Keycloak OIDC PKCE Bearer Authentication & Audit Log",
-      "status": "planned",
+      "status": "done",
       "acceptance": [
         "Verify JWT tokens with issuer, audience, and role checks (viewer, operator, admin)",
         "Support local demo authentication with localhost restriction",
@@ -69,17 +71,18 @@
       "implementation": [
         "backend/app/core/security.py",
         "backend/app/api/auth.py",
-        "backend/app/services/audit_service.py"
+        "backend/app/services/audit_service.py",
+        "frontend/src/components/AuditLogView.tsx",
+        "keycloak/realm-export.json"
       ],
       "tests": [
-        "backend/tests/test_auth.py",
-        "backend/tests/test_audit.py"
+        "backend/tests/test_auth_and_api.py"
       ]
     },
     {
       "id": "advisory-llm-diagnostics",
       "title": "Provider-Agnostic Advisory LLM Optimization Engine",
-      "status": "planned",
+      "status": "done",
       "acceptance": [
         "Provide grounded optimization advice based on actual compiled graph metrics",
         "Support OpenAI-compatible, Anthropic, Gemini, and Ollama adapters",

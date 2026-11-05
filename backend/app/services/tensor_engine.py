@@ -242,7 +242,75 @@ class Tensor:
         count = self.data.size if axis is None else (
             self.data.shape[axis] if isinstance(axis, int) else np.prod([self.data.shape[a] for a in axis])
         )
-        return self.sum(axis=axis, keepdims=keepdims) * (1.0 / count)
+    def transpose(self, *axes: int) -> Tensor:
+        """Transpose tensor dimensions with gradient support."""
+        if not axes:
+            axes = tuple(reversed(range(self.data.ndim)))
+        out_data = np.transpose(self.data, axes)
+        out = Tensor(
+            out_data,
+            requires_grad=self.requires_grad,
+            op_name="transpose",
+            parents=[self]
+        )
+
+        def _backward():
+            if self.requires_grad:
+                # Gradient of transpose is transpose of gradient with inverse permutation
+                inv_axes = np.argsort(axes)
+                grad = np.transpose(out.grad, inv_axes)
+                self.grad = grad if self.grad is None else self.grad + grad
+
+        out._backward_fn = _backward
+        return out
+
+    def reshape(self, *shape: int) -> Tensor:
+        """Reshape tensor with gradient support."""
+        out_data = self.data.reshape(shape)
+        out = Tensor(
+            out_data,
+            requires_grad=self.requires_grad,
+            op_name="reshape",
+            parents=[self]
+        )
+
+        def _backward():
+            if self.requires_grad:
+                # Gradient of reshape is reshape back to original shape
+                grad = out.grad.reshape(self.data.shape)
+                self.grad = grad if self.grad is None else self.grad + grad
+
+        out._backward_fn = _backward
+        return out
+
+
+    def __truediv__(self, other: Union[Tensor, float, int]) -> Tensor:
+        """Element-wise division with gradient support."""
+        other_t = other if isinstance(other, Tensor) else Tensor(other)
+        out_data = self.data / other_t.data
+        out = Tensor(
+            out_data,
+            requires_grad=self.requires_grad or other_t.requires_grad,
+            op_name="div",
+            parents=[self, other_t]
+        )
+
+        def _backward():
+            if self.requires_grad:
+                grad = out.grad / other_t.data
+                self.grad = grad if self.grad is None else self.grad + grad
+            if other_t.requires_grad:
+                # d/dy (x/y) = -x/y^2
+                grad = -out.grad * self.data / (other_t.data * other_t.data)
+                other_t.grad = grad if other_t.grad is None else other_t.grad + grad
+
+        out._backward_fn = _backward
+        return out
+
+
+    def __rtruediv__(self, other: Union[float, int]) -> Tensor:
+        """Reverse division: other / self."""
+        return Tensor(other) / self
 
 
 def trace_computational_graph(root: Tensor) -> Tuple[List[dict], List[dict]]:
