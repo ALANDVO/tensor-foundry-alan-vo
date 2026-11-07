@@ -75,3 +75,6 @@ Implementation: `backend/app/services/llm_advisor.py`, `backend/app/api/advisor.
 
 Tests: `backend/tests/test_llm_advisor.py`
 
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)

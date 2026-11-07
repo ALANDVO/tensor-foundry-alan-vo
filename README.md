@@ -213,3 +213,7 @@ TensorFoundry authenticates users via Keycloak OIDC with support for upstream en
 **Alan Vo**  
 Email: [alanvo@gmail.com](mailto:alanvo@gmail.com)  
 GitHub: [@ALANDVO](https://github.com/ALANDVO)
+
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)

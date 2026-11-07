@@ -72,3 +72,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - React 19 + TypeScript + Vite interactive frontend with dashboard tabs for graph compilation, coverage analysis, memory profiling, and audit logs.
 - Docker compose orchestration with Keycloak, backend, and frontend containers.
 - Complete CI workflow on `ubuntu-latest`.
+
+---
+
+Alan Vo · [alanvo.net](https://alanvo.net)
