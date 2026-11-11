@@ -77,3 +77,42 @@ def test_computational_graph_tracing():
     op_types = [n["op_type"] for n in nodes]
     assert "relu" in op_types
     assert "add" in op_types
+
+def test_tensor_mean_and_gradient():
+    # Test scalar mean
+    x = Tensor([1.0, 2.0, 3.0, 4.0], requires_grad=True)
+    m = x.mean()
+    np.testing.assert_allclose(m.data, 2.5)
+    m.backward()
+    np.testing.assert_allclose(x.grad, np.array([0.25, 0.25, 0.25, 0.25]))
+
+    # Test mean with axis
+    y = Tensor([[1.0, 2.0], [3.0, 4.0]], requires_grad=True)
+    m2 = y.mean(axis=0)
+    np.testing.assert_allclose(m2.data, np.array([2.0, 3.0]))
+    m2.backward(np.ones_like(m2.data))
+    np.testing.assert_allclose(y.grad, np.array([[0.5, 0.5], [0.5, 0.5]]))
+
+
+def test_tensor_transpose_and_gradient():
+    # Test 2D transpose
+    x = Tensor([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]], requires_grad=True)
+    tp = x.transpose()
+    np.testing.assert_allclose(tp.data, np.array([[1.0, 4.0], [2.0, 5.0], [3.0, 6.0]]))
+    tp.backward(np.ones_like(tp.data))
+    np.testing.assert_allclose(x.grad, np.ones_like(x.data))
+
+    # Test 3D transpose with custom axes
+    z = Tensor(np.arange(24, dtype=np.float32).reshape(2, 3, 4), requires_grad=True)
+    tp3 = z.transpose(2, 0, 1)
+    assert tp3.shape == (4, 2, 3)
+    tp3.backward(np.ones_like(tp3.data))
+    np.testing.assert_allclose(z.grad, np.ones_like(z.data))
+
+
+def test_tensor_reshape_and_gradient():
+    x = Tensor([[1.0, 2.0], [3.0, 4.0]], requires_grad=True)
+    r = x.reshape(4)
+    np.testing.assert_allclose(r.data, np.array([1.0, 2.0, 3.0, 4.0]))
+    r.backward(np.ones_like(r.data))
+    np.testing.assert_allclose(x.grad, np.ones_like(x.data))

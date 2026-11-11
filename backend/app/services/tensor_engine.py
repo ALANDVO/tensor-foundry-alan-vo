@@ -239,9 +239,33 @@ class Tensor:
         return out
 
     def mean(self, axis: Optional[Union[int, Tuple[int, ...]]] = None, keepdims: bool = False) -> Tensor:
+        """Compute mean along axis with gradient support."""
         count = self.data.size if axis is None else (
             self.data.shape[axis] if isinstance(axis, int) else np.prod([self.data.shape[a] for a in axis])
         )
+        out_data = np.mean(self.data, axis=axis, keepdims=keepdims)
+        out = Tensor(
+            out_data,
+            requires_grad=self.requires_grad,
+            op_name="mean",
+            parents=[self]
+        )
+
+        def _backward():
+            if self.requires_grad:
+                grad = out.grad / count
+                if not keepdims and axis is not None:
+                    # Reshape grad for broadcasting
+                    axes = [axis] if isinstance(axis, int) else list(axis)
+                    shape = list(self.data.shape)
+                    for a in axes:
+                        shape[a] = 1
+                    grad = np.reshape(grad, shape)
+                grad = np.broadcast_to(grad, self.data.shape)
+                self.grad = grad if self.grad is None else self.grad + grad
+
+        out._backward_fn = _backward
+        return out
     def transpose(self, *axes: int) -> Tensor:
         """Transpose tensor dimensions with gradient support."""
         if not axes:

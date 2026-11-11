@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "current_feature": "tensor-engine-and-graph-compiler",
+  "current_feature": "tensor-engine-mean-transpose-fix",
   "features": [
     {
       "id": "tensor-engine-and-graph-compiler",
@@ -94,6 +94,27 @@
       ],
       "tests": [
         "backend/tests/test_llm_advisor.py"
+      ]
+    }
+    ,
+    {
+      "id": "tensor-engine-mean-transpose-fix",
+      "title": "Complete Mean/Transpose Gradient Support",
+      "status": "done",
+      "acceptance": [
+        "Complete Tensor.mean(axis, keepdims) implementation with full gradient support for scalar and axis-wise reductions",
+        "Add docstrings to Tensor.mean and Tensor.transpose methods",
+        "Add comprehensive tests for mean, transpose, and reshape gradient correctness",
+        "All 33 backend tests passing"
+      ],
+      "implementation": [
+        "backend/app/services/tensor_engine.py",
+        "backend/tests/test_tensor_engine.py"
+      ],
+      "tests": [
+        "backend/tests/test_tensor_engine.py::test_tensor_mean_and_gradient",
+        "backend/tests/test_tensor_engine.py::test_tensor_transpose_and_gradient",
+        "backend/tests/test_tensor_engine.py::test_tensor_reshape_and_gradient"
       ]
     }
   ]
