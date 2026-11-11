@@ -1,9 +1,22 @@
 # Changelog
 
+## 1.4.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
 ## 1.3.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.
 
+## 1.3.0 — 2026-11-11
+
+### Fixed: tensor-engine-mean-transpose-complete
+- Completed `Tensor.mean(axis, keepdims)` with full gradient support for scalar and axis-wise reductions
+- Added docstrings to `Tensor.mean` and `Tensor.transpose` methods
+- Added comprehensive tests for `mean`, `transpose`, and `reshape` gradient correctness
+- All 33 backend tests passing
+
+### Enhanced: tensor-engine-core-ops
 ## 1.3.0 — 2026-11-05
 
 ### Enhanced: tensor-engine-core-ops

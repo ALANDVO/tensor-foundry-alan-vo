@@ -4,7 +4,7 @@ Each round completes one feature or repair. Future items are planned, not implem
 
 ## Current round
 
-tensor-engine-and-graph-compiler
+tensor-engine-mean-transpose-fix
 
 ## Roadmap
 
@@ -74,6 +74,20 @@ Acceptance:
 Implementation: `backend/app/services/llm_advisor.py`, `backend/app/api/advisor.py`
 
 Tests: `backend/tests/test_llm_advisor.py`
+
+### tensor-engine-mean-transpose-fix — Complete Mean/Transpose Gradient Support
+
+Status: done
+
+Acceptance:
+- Complete Tensor.mean(axis, keepdims) implementation with full gradient support for scalar and axis-wise reductions
+- Add docstrings to Tensor.mean and Tensor.transpose methods
+- Add comprehensive tests for mean, transpose, and reshape gradient correctness
+- All 33 backend tests passing
+
+Implementation: `backend/app/services/tensor_engine.py`, `backend/tests/test_tensor_engine.py`
+
+Tests: `backend/tests/test_tensor_engine.py::test_tensor_mean_and_gradient`, `backend/tests/test_tensor_engine.py::test_tensor_transpose_and_gradient`, `backend/tests/test_tensor_engine.py::test_tensor_reshape_and_gradient`
 
 ---
 
