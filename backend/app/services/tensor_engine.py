@@ -239,7 +239,25 @@ class Tensor:
         return out
 
     def mean(self, axis: Optional[Union[int, Tuple[int, ...]]] = None, keepdims: bool = False) -> Tensor:
-        """Compute mean along axis with gradient support."""
+        """Compute mean along axis with full gradient support for scalar and axis-wise reductions.
+
+    Args:
+        axis: Optional axis or axes along which to compute the mean. If None,
+            compute the mean over all elements (scalar output).
+        keepdims: If True, the reduced axes are retained as dimensions with size 1.
+            Default is False.
+
+    Returns:
+        Tensor with the mean values. The gradient flows back to the original
+        tensor with the same shape, supporting both scalar (axis=None) and
+        axis-wise reductions.
+
+    Note:
+        The gradient is computed as 1/count * broadcast_to(grad_output, self.data.shape),
+        where count is the number of elements reduced. For axis-wise reductions,
+        the gradient is properly reshaped and broadcasted to match the original
+        tensor shape.
+"""
         count = self.data.size if axis is None else (
             self.data.shape[axis] if isinstance(axis, int) else np.prod([self.data.shape[a] for a in axis])
         )
@@ -267,7 +285,23 @@ class Tensor:
         out._backward_fn = _backward
         return out
     def transpose(self, *axes: int) -> Tensor:
-        """Transpose tensor dimensions with gradient support."""
+        """Transpose tensor dimensions with gradient support.
+
+    Args:
+        *axes: Variable length argument specifying the permutation of dimensions.
+            If no arguments are given, reverses the order of all dimensions.
+            Each axis value must be in the range [-ndim, ndim).
+
+    Returns:
+        Tensor with reordered dimensions. The gradient backpropagates by
+        transposing the gradient with the inverse permutation.
+
+    Note:
+        The gradient of transpose is the transpose of the gradient with the
+        inverse permutation. That is, if y = x.transpose(axes), then
+        dx = dy.transpose(inv_perm(axes)), where inv_perm(axes) gives the
+        indices that would restore the original order.
+"""
         if not axes:
             axes = tuple(reversed(range(self.data.ndim)))
         out_data = np.transpose(self.data, axes)

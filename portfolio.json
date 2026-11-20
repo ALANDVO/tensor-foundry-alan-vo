@@ -17,5 +17,6 @@
     "ollama"
   ],
   "summary": "Work in progress: tensor-foundry-alan-vo",
-  "status": "work-in-progress"
+  "status": "work-in-progress",
+  "version": "1.5.0"
 }
