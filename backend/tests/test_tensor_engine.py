@@ -94,6 +94,23 @@ def test_tensor_mean_and_gradient():
     np.testing.assert_allclose(y.grad, np.array([[0.5, 0.5], [0.5, 0.5]]))
 
 
+
+def test_tensor_mean_and_gradient_keepdims():
+    # Test mean with axis and keepdims=True
+    x = Tensor([[1.0, 2.0], [3.0, 4.0]], requires_grad=True)
+    m = x.mean(axis=0, keepdims=True)
+    np.testing.assert_allclose(m.data, np.array([[2.0, 3.0]]))
+    m.backward(np.ones_like(m.data))
+    np.testing.assert_allclose(x.grad, np.array([[0.5, 0.5], [0.5, 0.5]]))
+
+    # Test mean with keepdims=True, no axis (scalar -> keepdims retains dims)
+    y = Tensor([1.0, 2.0, 3.0, 4.0], requires_grad=True)
+    n = y.mean(keepdims=True)
+    np.testing.assert_allclose(n.data, np.array([2.5]))
+    n.backward()
+    np.testing.assert_allclose(y.grad, np.array([0.25, 0.25, 0.25, 0.25]))
+
+
 def test_tensor_transpose_and_gradient():
     # Test 2D transpose
     x = Tensor([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]], requires_grad=True)
