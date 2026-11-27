@@ -1,8 +1,18 @@
 # Changelog
 
+## 1.7.0 — work-in-progress checkpoint
+
+Partial code published for continued development. Known issues: STATUS.md.
+
 ## 1.6.0 — work-in-progress checkpoint
 
 Partial code published for continued development. Known issues: STATUS.md.
+
+## 1.6.1 — work-in-progress checkpoint
+
+### Enhanced: tensor-engine-mean-transpose-fix
+- Added `test_tensor_mean_and_gradient_keepdims` test for mean with keepdims=True gradient support
+- All 34 backend tests passing (33 original + 1 new test keeping regression guard)
 
 ## 1.5.0 — work-in-progress checkpoint
 
